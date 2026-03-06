@@ -732,6 +732,201 @@ body::before {
 .fc-no  .fc-item { border-color: var(--red-bdr);   background: var(--red-bg); }
 
 /* ═══════════════════════════════
+   WORKAROUNDS SECTION
+═══════════════════════════════ */
+.workarounds {
+  grid-column: 1 / -1;
+  padding: 0;
+  border-top: 1px solid var(--wire);
+  border-right: none !important;
+  border-bottom: none !important;
+  border-left: none !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.wa-header {
+  display: flex; align-items: center; gap: 0;
+  padding: 14px 28px;
+  background: rgba(255,107,26,0.04);
+  border-bottom: 1px solid rgba(255,107,26,0.12);
+  position: relative;
+}
+
+.panel.p3 .wa-header {
+  background: rgba(201,168,76,0.04);
+  border-bottom-color: rgba(201,168,76,0.12);
+}
+
+.wa-header::before {
+  content:'';
+  position: absolute; left:0; top:0; bottom:0; width:3px;
+  background: var(--ember);
+  box-shadow: 2px 0 12px rgba(255,107,26,0.4);
+}
+
+.panel.p3 .wa-header::before {
+  background: var(--gold);
+  box-shadow: 2px 0 12px rgba(201,168,76,0.3);
+}
+
+/* circuit trace decoration */
+.wa-header::after {
+  content:'';
+  position: absolute; right: 28px; top: 50%;
+  transform: translateY(-50%);
+  width: 80px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255,107,26,0.3), transparent);
+}
+
+.wa-icon {
+  width: 28px; height: 28px;
+  display: flex; align-items: center; justify-content: center;
+  margin-right: 12px; flex-shrink: 0;
+  position: relative;
+}
+
+.wa-icon::before {
+  content:'';
+  position: absolute; inset:0;
+  border: 1px solid rgba(255,107,26,0.3);
+  border-radius: 2px;
+  transform: rotate(45deg) scale(0.7);
+}
+
+.panel.p3 .wa-icon::before { border-color: rgba(201,168,76,0.3); }
+
+.wa-icon-inner {
+  font-size: 11px;
+  color: var(--ember);
+  z-index: 1;
+}
+
+.panel.p3 .wa-icon-inner { color: var(--gold); }
+
+.wa-title-group {}
+
+.wa-eyebrow {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--ember); opacity: 0.7;
+  line-height: 1; margin-bottom: 2px;
+}
+
+.panel.p3 .wa-eyebrow { color: var(--gold); }
+
+.wa-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 15px; letter-spacing: 0.1em;
+  color: var(--text-hi); line-height: 1;
+}
+
+.wa-count {
+  margin-left: auto;
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 0.1em;
+  color: var(--text-lo);
+}
+
+.wa-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1px;
+  background: var(--wire);
+  border-top: 1px solid var(--wire);
+}
+
+.wa-card {
+  background: var(--surface);
+  padding: 18px 20px;
+  position: relative;
+  transition: background 0.2s;
+  cursor: default;
+}
+
+.wa-card:hover { background: var(--hover); }
+
+/* top micro-indicator */
+.wa-card::before {
+  content:'';
+  position: absolute; top:0; left:0; right:0; height:1px;
+  background: transparent;
+  transition: background 0.2s;
+}
+
+.wa-card:hover::before {
+  background: linear-gradient(90deg, transparent, rgba(255,107,26,0.25), transparent);
+}
+
+.panel.p3 .wa-card:hover::before {
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,0.2), transparent);
+}
+
+.wac-bottleneck {
+  display: flex; align-items: center; gap: 7px;
+  margin-bottom: 10px;
+}
+
+.wac-warning {
+  font-family: 'Space Mono', monospace;
+  font-size: 8px; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #D4973A;
+  background: rgba(212,151,58,0.08);
+  border: 1px solid rgba(212,151,58,0.2);
+  padding: 2px 7px; border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.wac-limit {
+  font-size: 11px; color: var(--text-lo);
+  font-family: 'Space Mono', monospace;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.wac-fix-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px; letter-spacing: 0.06em;
+  color: var(--text-hi);
+  line-height: 1.1; margin-bottom: 7px;
+}
+
+.wac-method {
+  font-size: 11.5px; color: var(--text-md);
+  line-height: 1.55; margin-bottom: 10px;
+}
+
+.wac-method code {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--ember);
+  background: rgba(255,107,26,0.08);
+  padding: 1px 5px; border-radius: 2px;
+}
+
+.panel.p3 .wac-method code {
+  color: var(--gold);
+  background: rgba(201,168,76,0.08);
+}
+
+.wac-tags {
+  display: flex; flex-wrap: wrap; gap: 4px;
+}
+
+.wac-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 9px; letter-spacing: 0.08em;
+  color: var(--text-lo);
+  border: 1px solid var(--wire-hi);
+  padding: 2px 7px; border-radius: 2px;
+}
+
+.wac-tag.active {
+  color: var(--green);
+  border-color: var(--green-bdr);
+  background: var(--green-bg);
+}
+
+/* ═══════════════════════════════
    UPGRADE BANNER
 ═══════════════════════════════ */
 .upgrade-bar {
@@ -916,7 +1111,7 @@ body::before {
   <h1 class="hero-h1"><span class="accent">PEACE</span>TIME</h1>
   <div class="hero-sub">Agency.com</div>
   <p class="hero-body">
-    Three deployment tiers for a fully custom-coded operation. No templates. Select the tier that matches your current ops stage, stack is designed to scale without rebuilding.
+    Three deployment tiers for a fully custom-coded operation. No templates. Select the tier that matches your current ops stage — stack is designed to scale without rebuilding.
   </p>
   <div class="hero-tags">
     <div class="h-tag">Custom Code Only</div>
@@ -1030,6 +1225,72 @@ body::before {
           </div>
         </div>
       </div>
+
+      <!-- WORKAROUNDS T1 -->
+      <div class="pbd-cell workarounds">
+        <div class="wa-header">
+          <div class="wa-icon"><span class="wa-icon-inner">⚡</span></div>
+          <div class="wa-title-group">
+            <div class="wa-eyebrow">SATCORP Tactical Fixes</div>
+            <div class="wa-title">Bottleneck Workarounds</div>
+          </div>
+          <div class="wa-count">4 PATCHES APPLIED</div>
+        </div>
+        <div class="wa-grid">
+          <div class="wa-card">
+            <div class="wac-bottleneck">
+              <span class="wac-warning">BOTTLENECK</span>
+              <span class="wac-limit">512MB RAM ceiling</span>
+            </div>
+            <div class="wac-fix-label">Offload Heavy Ops to the Edge</div>
+            <div class="wac-method">Deploy compute-heavy logic as <code>Cloudflare Workers</code> — runs at the edge, never hits Railway. Form validation, redirects, A/B logic, geo-routing all move off-server for free.</div>
+            <div class="wac-tags">
+              <span class="wac-tag">CF Workers</span>
+              <span class="wac-tag active">FREE</span>
+              <span class="wac-tag">Zero RAM cost</span>
+            </div>
+          </div>
+          <div class="wa-card">
+            <div class="wac-bottleneck">
+              <span class="wac-warning">BOTTLENECK</span>
+              <span class="wac-limit">DB pauses after 7d idle</span>
+            </div>
+            <div class="wac-fix-label">Keep-Alive Cron Ping</div>
+            <div class="wac-method">Schedule a lightweight <code>Railway cron job</code> to ping Supabase every 5 days with a trivial SELECT query. Costs ~0 compute. DB stays warm indefinitely, zero idle pauses.</div>
+            <div class="wac-tags">
+              <span class="wac-tag">Railway Cron</span>
+              <span class="wac-tag active">FREE</span>
+              <span class="wac-tag">Always warm</span>
+            </div>
+          </div>
+          <div class="wa-card">
+            <div class="wac-bottleneck">
+              <span class="wac-warning">BOTTLENECK</span>
+              <span class="wac-limit">100 emails/day cap</span>
+            </div>
+            <div class="wac-fix-label">Multi-Key Email Rotation</div>
+            <div class="wac-method">Register 3–4 Resend sub-accounts under separate domains or subdomains. Rotate API keys via <code>n8n</code> routing logic based on send count. Effectively 300–400 sends/day, all free.</div>
+            <div class="wac-tags">
+              <span class="wac-tag">Resend API</span>
+              <span class="wac-tag active">FREE</span>
+              <span class="wac-tag">3–4× capacity</span>
+            </div>
+          </div>
+          <div class="wa-card">
+            <div class="wac-bottleneck">
+              <span class="wac-warning">BOTTLENECK</span>
+              <span class="wac-limit">~50–150 concurrent users</span>
+            </div>
+            <div class="wac-fix-label">Aggressive Cache Rules</div>
+            <div class="wac-method">Configure <code>Cloudflare Cache Rules</code> to serve 85–90% of requests from edge without touching Railway. Only auth'd, dynamic routes hit the origin. Multiplies effective capacity 5–8×.</div>
+            <div class="wac-tags">
+              <span class="wac-tag">CF Cache</span>
+              <span class="wac-tag active">FREE</span>
+              <span class="wac-tag">5–8× throughput</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1115,6 +1376,72 @@ body::before {
           </div>
         </div>
       </div>
+
+      <!-- WORKAROUNDS T2 -->
+      <div class="pbd-cell workarounds">
+        <div class="wa-header">
+          <div class="wa-icon"><span class="wa-icon-inner">⚡</span></div>
+          <div class="wa-title-group">
+            <div class="wa-eyebrow">SATCORP Tactical Fixes</div>
+            <div class="wa-title">Bottleneck Workarounds</div>
+          </div>
+          <div class="wa-count">4 PATCHES APPLIED</div>
+        </div>
+        <div class="wa-grid">
+          <div class="wa-card">
+            <div class="wac-bottleneck">
+              <span class="wac-warning">BOTTLENECK</span>
+              <span class="wac-limit">500MB DB still a ceiling</span>
+            </div>
+            <div class="wac-fix-label">Partition + Archive Cold Data</div>
+            <div class="wac-method">Use <code>pg_partitioning</code> on high-volume tables by date. Offload rows older than 90 days to <code>Cloudflare R2</code> as compressed JSON via a nightly n8n export. DB stays lean, history stays accessible.</div>
+            <div class="wac-tags">
+              <span class="wac-tag">pg_partitioning</span>
+              <span class="wac-tag active">FREE</span>
+              <span class="wac-tag">Infinite archive</span>
+            </div>
+          </div>
+          <div class="wa-card">
+            <div class="wac-bottleneck">
+              <span class="wac-warning">BOTTLENECK</span>
+              <span class="wac-limit">512MB split across services</span>
+            </div>
+            <div class="wac-fix-label">Service Isolation on Railway</div>
+            <div class="wac-method">Pin <code>n8n</code> to its own Railway service with a hard memory limit. App server claims full 512MB uncontested. n8n only wakes for automation runs — idle RAM usage drops to ~80MB.</div>
+            <div class="wac-tags">
+              <span class="wac-tag">Railway Services</span>
+              <span class="wac-tag active">NO EXTRA COST</span>
+              <span class="wac-tag">Full app RAM</span>
+            </div>
+          </div>
+          <div class="wa-card">
+            <div class="wac-bottleneck">
+              <span class="wac-warning">BOTTLENECK</span>
+              <span class="wac-limit">10k Redis commands/day</span>
+            </div>
+            <div class="wac-fix-label">Batch Writes via n8n Queue</div>
+            <div class="wac-method">Instead of per-request Redis writes, buffer state in-memory and flush in batches every 30s via an <code>n8n interval trigger</code>. Cuts Redis command volume by 80–90% with zero loss of data integrity.</div>
+            <div class="wac-tags">
+              <span class="wac-tag">n8n Batching</span>
+              <span class="wac-tag active">FREE</span>
+              <span class="wac-tag">10× efficiency</span>
+            </div>
+          </div>
+          <div class="wa-card">
+            <div class="wac-bottleneck">
+              <span class="wac-warning">BOTTLENECK</span>
+              <span class="wac-limit">No native observability</span>
+            </div>
+            <div class="wac-fix-label">Self-Rolled Health Monitor</div>
+            <div class="wac-method">Combine <code>Supabase pg_cron</code> + Umami event tracking + n8n alerting. Ping endpoints every 5 min, log response times to Supabase, alert via email on anomaly. Full ops visibility at zero cost.</div>
+            <div class="wac-tags">
+              <span class="wac-tag">pg_cron</span>
+              <span class="wac-tag">Umami</span>
+              <span class="wac-tag active">FREE</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1128,7 +1455,7 @@ body::before {
       <div>
         <div class="phd-label">Tier 03 // Pro Level</div>
         <div class="phd-title">Pro Level</div>
-        <div class="phd-desc">Production-grade infrastructure. Paid only where it directly expands capability, everything else stays free.</div>
+        <div class="phd-desc">Production-grade infrastructure. Paid only where it directly expands capability — everything else stays free.</div>
       </div>
       <div class="phd-price-block">
         <div class="phd-price">$55<span style="font-family:'DM Sans';font-size:16px;font-weight:400;color:var(--text-md)">/mo</span></div>
@@ -1195,6 +1522,72 @@ body::before {
               <div class="fc-item">Video encoding at scale</div>
               <div class="fc-item">On-prem data residency</div>
               <div class="fc-item">Enterprise 99.99% SLA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- WORKAROUNDS T3 -->
+      <div class="pbd-cell workarounds">
+        <div class="wa-header">
+          <div class="wa-icon"><span class="wa-icon-inner">⚡</span></div>
+          <div class="wa-title-group">
+            <div class="wa-eyebrow">SATCORP Tactical Fixes</div>
+            <div class="wa-title">Bottleneck Workarounds</div>
+          </div>
+          <div class="wa-count">4 PATCHES APPLIED</div>
+        </div>
+        <div class="wa-grid">
+          <div class="wa-card">
+            <div class="wac-bottleneck">
+              <span class="wac-warning">BOTTLENECK</span>
+              <span class="wac-limit">Video encoding at scale</span>
+            </div>
+            <div class="wac-fix-label">Pipe to Cloudflare Stream</div>
+            <div class="wac-method">Use <code>Cloudflare Stream</code> for upload + encoding — pay-as-you-go at ~$5/1000 min stored. No monthly commitment. n8n webhook triggers upload on file drop, returns playback URL. Zero Railway CPU for video.</div>
+            <div class="wac-tags">
+              <span class="wac-tag">CF Stream</span>
+              <span class="wac-tag">Pay-as-go</span>
+              <span class="wac-tag active">No CPU impact</span>
+            </div>
+          </div>
+          <div class="wa-card">
+            <div class="wac-bottleneck">
+              <span class="wac-warning">BOTTLENECK</span>
+              <span class="wac-limit">HIPAA compliance gap</span>
+            </div>
+            <div class="wac-fix-label">Column Encryption + Audit Log</div>
+            <div class="wac-method">Enable <code>pgcrypto</code> column-level encryption on PII fields in Supabase. Add <code>pg_audit</code> extension for access logging. Covers most HIPAA technical safeguards without dedicated infrastructure.</div>
+            <div class="wac-tags">
+              <span class="wac-tag">pgcrypto</span>
+              <span class="wac-tag">pg_audit</span>
+              <span class="wac-tag active">FREE</span>
+            </div>
+          </div>
+          <div class="wa-card">
+            <div class="wac-bottleneck">
+              <span class="wac-warning">BOTTLENECK</span>
+              <span class="wac-limit">Bandwidth cost spikes</span>
+            </div>
+            <div class="wac-fix-label">R2 + Cloudflare CDN for All Media</div>
+            <div class="wac-method">Serve every static asset, image, and downloadable file from <code>Cloudflare R2</code> via a custom subdomain. R2 has zero egress fees. Cloudflare CDN caches globally. 50GB Supabase bandwidth reserved for DB only.</div>
+            <div class="wac-tags">
+              <span class="wac-tag">R2 Zero Egress</span>
+              <span class="wac-tag active">FREE bandwidth</span>
+              <span class="wac-tag">∞ CDN</span>
+            </div>
+          </div>
+          <div class="wa-card">
+            <div class="wac-bottleneck">
+              <span class="wac-warning">BOTTLENECK</span>
+              <span class="wac-limit">No enterprise SLA guarantee</span>
+            </div>
+            <div class="wac-fix-label">Synthetic Uptime + Failover Page</div>
+            <div class="wac-method">Chain <code>UptimeRobot</code> (free) + Railway health checks + Cloudflare custom error pages. On origin failure, CF serves a branded maintenance page instantly. n8n alerts ops within 60s. Achieves 99.9%+ perceived uptime.</div>
+            <div class="wac-tags">
+              <span class="wac-tag">UptimeRobot</span>
+              <span class="wac-tag">CF Failover</span>
+              <span class="wac-tag active">FREE</span>
             </div>
           </div>
         </div>
