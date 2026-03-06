@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SATCORP///Infrastructure Tiers</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300;400;500;600&family=Barlow+Condensed:wght@500;600;700;800&family=Barlow+Semi+Condensed:wght@400;500;600&family=Orbitron:wght@600;700;900&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg:           #0F1318;
+  --bg-card:      #161C24;
+  --bg-elevated:  #1C2430;
+  --bg-hover:     #212D3A;
+  --border:       #263040;
+  --border-light: #2E3D50;
+  --border-glow:  rgba(255,120,20,0.25);
+
+  --ember:        #FF7A1A;
+  --ember-soft:   #E86A10;
+  --ember-pale:   rgba(255,122,26,0.1);
+  --ember-glow:   rgba(255,122,26,0.06);
+
+  --sand:         #C4A46A;
+  --sand-pale:    rgba(196,164,106,0.1);
+
+  --text-primary:   #D8E4EE;
+  --text-secondary: #7A96AE;
+  --text-muted:     #445566;
+  --text-bright:    #EEF4FA;
+
+  --green:  #3DD68C;
+  --red:    #FF5555;
+  --green-bg: rgba(61,214,140,0.06);
+  --red-bg:   rgba(255,85,85,0.06);
+  --green-border: rgba(61,214,140,0.18);
+  --red-border:   rgba(255,85,85,0.18);
+
+  --radius: 6px;
+  --radius-sm: 4px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: 'Barlow', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ═══ TOPBAR ═══ */
+.topbar {
+  height: 52px;
+  background: rgba(15,19,24,0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top:0; z-index:100;
+  display: flex; align-items: center;
+  padding: 0 24px;
+  justify-content: space-between;
+}
+
+.topbar-brand {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.brand-mark {
+  width: 28px; height: 28px;
+  border: 1.5px solid var(--ember);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+}
+
+.brand-mark::before {
+  content: '';
+  width: 10px; height: 10px;
+  background: var(--ember);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+  box-shadow: 0 0 8px var(--ember);
+}
+
+.brand-name {
+  font-family: 'Orbitron', monospace;
+  font-size: 13px; font-weight: 700;
+  color: var(--text-bright);
+  letter-spacing: 0.12em;
+}
+
+.brand-name span { color: var(--ember); }
+
+.topbar-right {
+  display: flex; align-items: center; gap: 16px;
+}
+
+.status-pill {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(61,214,140,0.08);
+  border: 1px solid rgba(61,214,140,0.2);
+  border-radius: 20px;
+  padding: 4px 10px;
+  font-size: 11px; font-weight: 500;
+  color: var(--green); letter-spacing: 0.06em;
+}
+
+.status-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  animation: blink 2s infinite;
+}
+
+@keyframes blink {
+  0%,100% { opacity:1; } 50% { opacity:0.3; }
+}
+
+.doc-ref {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 500;
+  color: var(--text-muted); letter-spacing: 0.1em;
+  display: none;
+}
+@media(min-width:600px){ .doc-ref { display:block; } }
+
+/* ═══ HERO ═══ */
+.hero {
+  padding: 48px 24px 40px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.hero-label {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ember);
+  margin-bottom: 16px;
+}
+
+.hero-label::before {
+  content:'';
+  width: 20px; height: 1.5px;
+  background: var(--ember);
+}
+
+.hero-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(28px, 6vw, 52px);
+  font-weight: 800; line-height: 1.05;
+  letter-spacing: 0.02em;
+  color: var(--text-bright);
+  margin-bottom: 12px;
+}
+
+.hero-title .accent { color: var(--ember); }
+
+.hero-body {
+  font-size: 15px; font-weight: 400;
+  color: var(--text-secondary);
+  max-width: 540px;
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.hero-chips {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+
+.chip {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+  color: var(--text-secondary);
+}
+
+/* ═══ TIER SWITCHER ═══ */
+.switcher-wrap {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 24px 48px;
+}
+
+.tier-tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.tab-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 12px 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-btn::before {
+  content:'';
+  position: absolute; top:0; left:0; right:0; height:2px;
+  background: transparent;
+  transition: background 0.2s;
+}
+
+.tab-btn:hover { background: var(--bg-elevated); border-color: var(--border-light); }
+
+.tab-btn.active { background: var(--bg-elevated); border-color: var(--border-light); }
+.tab-btn.active.t1::before { background: var(--text-muted); }
+.tab-btn.active.t2::before { background: var(--ember); box-shadow: 0 0 10px rgba(255,122,26,0.4); }
+.tab-btn.active.t3::before { background: var(--sand); }
+
+.tab-tier-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.16em;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.tab-tier-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(14px, 2.5vw, 18px);
+  font-weight: 700; line-height: 1;
+  margin-bottom: 6px;
+  letter-spacing: 0.04em;
+}
+
+.tab-btn.t1 .tab-tier-name { color: var(--text-primary); }
+.tab-btn.t2 .tab-tier-name { color: var(--ember); }
+.tab-btn.t3 .tab-tier-name { color: var(--sand); }
+
+.tab-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(13px, 2.5vw, 16px);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.tab-badge {
+  position: absolute; top: 8px; right: 8px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 8px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.tab-btn.t2 .tab-badge {
+  background: rgba(255,122,26,0.12);
+  color: var(--ember);
+  border: 1px solid rgba(255,122,26,0.25);
+}
+
+/* ═══ TIER PANEL ═══ */
+.tier-panel {
+  display: none;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  animation: panelIn 0.25s ease both;
+}
+
+.tier-panel.active { display: block; }
+
+@keyframes panelIn {
+  from { opacity:0; transform:translateY(6px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+/* PANEL HEADER */
+.panel-head {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+  display: flex; flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  position: relative;
+}
+
+.panel-head::before {
+  content:'';
+  position: absolute; top:0; left:0; right:0; height:2px;
+}
+
+.tp1 .panel-head::before { background: var(--text-muted); }
+.tp2 .panel-head::before { background: linear-gradient(90deg, var(--ember-soft), var(--ember), var(--ember-soft)); box-shadow: 0 0 16px rgba(255,122,26,0.3); }
+.tp3 .panel-head::before { background: linear-gradient(90deg, var(--sand), #E8C880, var(--sand)); }
+
+.ph-left {}
+
+.ph-tag {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 6px;
+}
+
+.ph-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(22px, 4vw, 30px);
+  font-weight: 800; line-height: 1;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.tp1 .ph-name { color: var(--text-primary); }
+.tp2 .ph-name { color: var(--ember); }
+.tp3 .ph-name { color: var(--sand); }
+
+.ph-desc {
+  font-size: 13px; color: var(--text-secondary);
+  max-width: 400px;
+}
+
+.ph-right {
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.ph-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 800; line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.tp1 .ph-price { color: var(--text-primary); }
+.tp2 .ph-price { color: var(--ember); }
+.tp3 .ph-price { color: var(--sand); }
+
+.ph-price-note {
+  font-size: 11px; color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.ph-rec {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ember);
+  background: var(--ember-pale);
+  border: 1px solid rgba(255,122,26,0.2);
+  border-radius: 2px;
+  padding: 3px 8px;
+  margin-top: 8px;
+}
+
+.ph-rec::before { content:'◈'; font-size: 8px; }
+
+/* PANEL BODY */
+.panel-body {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+@media(min-width:700px){
+  .panel-body { grid-template-columns: 1fr 1fr; }
+}
+
+.pb-section {
+  padding: 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+@media(min-width:700px){
+  .pb-section { border-right: 1px solid var(--border); }
+  .pb-section:nth-child(even) { border-right: none; }
+  .pb-section:nth-last-child(-n+2) { border-bottom: none; }
+}
+
+.pb-section:last-child { border-bottom: none; }
+
+.sec-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+.sec-title::after {
+  content:''; flex:1; height:1px;
+  background: var(--border);
+}
+
+/* STACK LIST */
+.stack-list { display: flex; flex-direction: column; gap: 2px; }
+
+.stack-item {
+  display: flex; align-items: baseline;
+  gap: 10px; padding: 6px 8px;
+  border-radius: var(--radius-sm);
+  transition: background 0.15s;
+  cursor: default;
+}
+
+.stack-item:hover { background: var(--bg-elevated); }
+
+.si-dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+.tp1 .si-dot { background: var(--text-muted); }
+.tp2 .si-dot { background: var(--ember); box-shadow: 0 0 5px rgba(255,122,26,0.4); }
+.tp3 .si-dot { background: var(--sand); }
+
+.si-name {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: var(--text-bright);
+  min-width: 100px; flex-shrink: 0;
+}
+
+.si-desc {
+  font-size: 12px; color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+.si-free {
+  font-size: 10px; font-weight: 600;
+  color: var(--green);
+  background: var(--green-bg);
+  border-radius: 3px;
+  padding: 1px 5px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* LIMITS TABLE */
+.limits-table { display: flex; flex-direction: column; gap: 0; }
+
+.lt-row {
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+.lt-row:last-child { border-bottom: none; }
+
+.lt-key {
+  font-size: 12px; color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.lt-val {
+  font-family: 'Barlow Semi Condensed', sans-serif;
+  font-size: 13px; font-weight: 600;
+  color: var(--text-primary);
+  text-align: right;
+}
+
+.lt-val.warn { color: #FFB84D; }
+.lt-val.good { color: var(--green); }
+
+/* SCALE BARS */
+.scale-list { display: flex; flex-direction: column; gap: 12px; }
+
+.sl-row { display: flex; flex-direction: column; gap: 5px; }
+
+.sl-top {
+  display: flex; justify-content: space-between;
+  align-items: baseline;
+}
+
+.sl-label { font-size: 12px; color: var(--text-secondary); }
+
+.sl-pct {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700;
+}
+
+.tp1 .sl-pct { color: var(--text-secondary); }
+.tp2 .sl-pct { color: var(--ember); }
+.tp3 .sl-pct { color: var(--sand); }
+
+.sl-track {
+  height: 4px; background: var(--bg);
+  border-radius: 2px; overflow: hidden;
+}
+
+.sl-fill {
+  height: 100%; border-radius: 2px;
+  transition: width 0.8s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.tp1 .sl-fill { background: var(--text-muted); }
+.tp2 .sl-fill { background: linear-gradient(90deg, var(--ember-soft), var(--ember)); }
+.tp3 .sl-fill { background: linear-gradient(90deg, #A88050, var(--sand)); }
+
+/* FIT LISTS */
+.fit-pair {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+}
+
+.fit-col {}
+
+.fit-col-head {
+  display: flex; align-items: center; gap: 6px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.fit-col.yes .fit-col-head { color: var(--green); }
+.fit-col.no  .fit-col-head { color: var(--red); }
+
+.fit-col-head .fch-icon {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 900;
+  flex-shrink: 0;
+}
+
+.fit-col.yes .fch-icon { background: var(--green-bg); border: 1px solid var(--green-border); color: var(--green); }
+.fit-col.no  .fch-icon { background: var(--red-bg);   border: 1px solid var(--red-border);   color: var(--red); }
+
+.fit-items { display: flex; flex-direction: column; gap: 4px; }
+
+.fit-item {
+  font-size: 12px; color: var(--text-secondary);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  border-left: 2px solid;
+  line-height: 1.4;
+}
+
+.fit-col.yes .fit-item { border-color: rgba(61,214,140,0.2); background: var(--green-bg); }
+.fit-col.no  .fit-item { border-color: rgba(255,85,85,0.2);  background: var(--red-bg); }
+
+/* ═══ COMPARISON BANNER ═══ */
+.compare-bar {
+  max-width: 960px; margin: 0 auto 48px;
+  padding: 0 24px;
+}
+
+.compare-inner {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+
+.compare-left {}
+
+.compare-label {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 4px;
+}
+
+.compare-text {
+  font-size: 14px; color: var(--text-secondary);
+}
+
+.compare-text strong { color: var(--ember); }
+
+.upgrade-btn {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ember);
+  background: var(--ember-pale);
+  border: 1px solid rgba(255,122,26,0.3);
+  border-radius: var(--radius-sm);
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.upgrade-btn:hover {
+  background: rgba(255,122,26,0.15);
+  border-color: var(--ember);
+  box-shadow: 0 0 16px rgba(255,122,26,0.15);
+}
+
+/* ═══ FOOTER ═══ */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 20px 24px;
+  display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: space-between;
+  gap: 12px;
+}
+
+.footer-brand {
+  font-family: 'Orbitron', monospace;
+  font-size: 11px; font-weight: 700;
+  color: var(--ember);
+  letter-spacing: 0.14em;
+}
+
+.footer-meta {
+  font-size: 11px; color: var(--text-muted);
+  letter-spacing: 0.06em;
+}
+
+.footer-tags {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+
+.footer-tag {
+  font-size: 10px; color: var(--text-muted);
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  letter-spacing: 0.08em;
+}
+
+/* ═══ MOBILE FIXES ═══ */
+@media(max-width:480px){
+  .hero { padding: 32px 16px 28px; }
+  .switcher-wrap { padding: 0 16px 40px; }
+  .compare-bar { padding: 0 16px; }
+
+  .tab-btn { padding: 10px 8px 10px; }
+  .tab-tier-num { display: none; }
+
+  .panel-head { padding: 16px; }
+  .ph-price { font-size: 28px; }
+  .pb-section { padding: 16px; }
+
+  .fit-pair { grid-template-columns: 1fr; gap: 8px; }
+
+  .stack-item { flex-wrap: wrap; }
+  .si-free { margin-left: 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<nav class="topbar">
+  <div class="topbar-brand">
+    <div class="brand-mark"></div>
+    <div class="brand-name">SAT<span>CORP</span></div>
+  </div>
+  <div class="topbar-right">
+    <div class="doc-ref">REF-0042 // INFRA BRIEF</div>
+    <div class="status-pill">
+      <div class="status-dot"></div>
+      ACTIVE
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-label">Tactical Infrastructure Architecture</div>
+  <h1 class="hero-title"><span class="accent">PEACETIME</span>AGENCY.COM</h1>
+  <p class="hero-body">
+    Three deployment tiers for a fully custom-coded operation. No templates. Select the tier that matches your current ops stage, stack is designed to scale without rebuilding.
+  </p>
+  <div class="hero-chips">
+    <div class="chip">Custom Code Only</div>
+    <div class="chip">No Templates</div>
+    <div class="chip">Dev-Operated</div>
+    <div class="chip">No Vendor Lock-In</div>
+  </div>
+</section>
+
+<!-- TIER SWITCHER -->
+<div class="switcher-wrap">
+
+  <!-- TABS -->
+  <div class="tier-tabs">
+    <button class="tab-btn t1 active" onclick="switchTier('t1',this)">
+      <div class="tab-tier-num">Tier 01</div>
+      <div class="tab-tier-name">Entry</div>
+      <div class="tab-price">~$6/mo</div>
+    </button>
+    <button class="tab-btn t2" onclick="switchTier('t2',this)">
+      <div class="tab-badge">Recommended</div>
+      <div class="tab-tier-num">Tier 02</div>
+      <div class="tab-tier-name">Mid Level</div>
+      <div class="tab-price">~$7/mo</div>
+    </button>
+    <button class="tab-btn t3" onclick="switchTier('t3',this)">
+      <div class="tab-tier-num">Tier 03</div>
+      <div class="tab-tier-name">Pro</div>
+      <div class="tab-price">~$55/mo</div>
+    </button>
+  </div>
+
+  <!-- ── PANEL T1 ── -->
+  <div class="tier-panel tp1 active" id="panel-t1">
+    <div class="panel-head">
+      <div class="ph-left">
+        <div class="ph-tag">Tier 01 // Entry Level</div>
+        <div class="ph-name">Entry Level</div>
+        <div class="ph-desc">Lean launch stack. Minimal dependencies, minimal code surface, zero waste.</div>
+      </div>
+      <div class="ph-right">
+        <div class="ph-price">$6<span style="font-size:16px;font-weight:500;color:var(--text-secondary)">/mo</span></div>
+        <div class="ph-price-note">~$82/yr including domain</div>
+      </div>
+    </div>
+
+    <div class="panel-body">
+
+      <!-- STACK -->
+      <div class="pb-section">
+        <div class="sec-title">Stack</div>
+        <div class="stack-list">
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Porkbun</div>
+            <div class="si-desc">Domain reg — free WHOIS + SSL</div>
+            <div class="si-free">$10/yr</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Cloudflare</div>
+            <div class="si-desc">DNS, CDN, DDoS, SSL termination</div>
+            <div class="si-free">FREE</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Railway</div>
+            <div class="si-desc">Compute — one app, always-on</div>
+            <div class="si-free">$5/mo</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Supabase</div>
+            <div class="si-desc">Postgres + Auth + REST API</div>
+            <div class="si-free">FREE</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Resend</div>
+            <div class="si-desc">Transactional email — 3k/mo</div>
+            <div class="si-free">FREE</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Cloudflare R2</div>
+            <div class="si-desc">10GB object storage, zero egress</div>
+            <div class="si-free">FREE</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- LIMITS -->
+      <div class="pb-section">
+        <div class="sec-title">Real Limits</div>
+        <div class="limits-table">
+          <div class="lt-row"><span class="lt-key">Concurrent users</span><span class="lt-val">~50–150</span></div>
+          <div class="lt-row"><span class="lt-key">Database size</span><span class="lt-val warn">500 MB</span></div>
+          <div class="lt-row"><span class="lt-key">RAM</span><span class="lt-val warn">512 MB</span></div>
+          <div class="lt-row"><span class="lt-key">Bandwidth</span><span class="lt-val">100 GB/mo</span></div>
+          <div class="lt-row"><span class="lt-key">Email sends</span><span class="lt-val warn">100/day</span></div>
+          <div class="lt-row"><span class="lt-key">File storage</span><span class="lt-val">10 GB</span></div>
+          <div class="lt-row"><span class="lt-key">DB auto-pause</span><span class="lt-val warn">7 days idle</span></div>
+        </div>
+      </div>
+
+      <!-- SCALABILITY -->
+      <div class="pb-section">
+        <div class="sec-title">Scalability</div>
+        <div class="scale-list">
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-label">Traffic capacity</span><span class="sl-pct">25%</span></div>
+            <div class="sl-track"><div class="sl-fill" style="width:25%"></div></div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-label">Data headroom</span><span class="sl-pct">15%</span></div>
+            <div class="sl-track"><div class="sl-fill" style="width:15%"></div></div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-label">Compute power</span><span class="sl-pct">20%</span></div>
+            <div class="sl-track"><div class="sl-fill" style="width:20%"></div></div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-label">Configuration flex</span><span class="sl-pct">40%</span></div>
+            <div class="sl-track"><div class="sl-fill" style="width:40%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FIT -->
+      <div class="pb-section">
+        <div class="sec-title">Operational Fit</div>
+        <div class="fit-pair">
+          <div class="fit-col yes">
+            <div class="fit-col-head"><div class="fch-icon">✓</div>Deploy For</div>
+            <div class="fit-items">
+              <div class="fit-item">Agency brochure site</div>
+              <div class="fit-item">1–5 client portals</div>
+              <div class="fit-item">Internal team tools</div>
+              <div class="fit-item">MVP / proof of concept</div>
+              <div class="fit-item">Lead capture forms</div>
+            </div>
+          </div>
+          <div class="fit-col no">
+            <div class="fit-col-head"><div class="fch-icon">✕</div>Avoid For</div>
+            <div class="fit-items">
+              <div class="fit-item">High-traffic apps</div>
+              <div class="fit-item">Heavy media workflows</div>
+              <div class="fit-item">Email campaigns</div>
+              <div class="fit-item">Real-time dashboards</div>
+              <div class="fit-item">Background pipelines</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PANEL T2 ── -->
+  <div class="tier-panel tp2" id="panel-t2">
+    <div class="panel-head">
+      <div class="ph-left">
+        <div class="ph-tag">Tier 02 // Mid Level</div>
+        <div class="ph-name">Mid Level</div>
+        <div class="ph-desc">Same core cost. Orchestrate free tiers for full agency ops; automations, dual email, background jobs.</div>
+        <div class="ph-rec">Recommended</div>
+      </div>
+      <div class="ph-right">
+        <div class="ph-price">$7<span style="font-size:16px;font-weight:500;color:var(--text-secondary)">/mo</span></div>
+        <div class="ph-price-note">~$94/yr — max capability/cost ratio</div>
+      </div>
+    </div>
+
+    <div class="panel-body">
+
+      <div class="pb-section">
+        <div class="sec-title">Stack</div>
+        <div class="stack-list">
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Porkbun</div>
+            <div class="si-desc">Domain + WHOIS privacy</div>
+            <div class="si-free">$10/yr</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Cloudflare</div>
+            <div class="si-desc">DNS, CDN, Workers edge logic</div>
+            <div class="si-free">FREE</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Railway + n8n</div>
+            <div class="si-desc">App server + self-hosted automation</div>
+            <div class="si-free">$5/mo</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Supabase</div>
+            <div class="si-desc">DB + Auth + Realtime + Edge fn</div>
+            <div class="si-free">FREE</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Resend + Brevo</div>
+            <div class="si-desc">Dual email — 400 sends/day combined</div>
+            <div class="si-free">FREE</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Inngest</div>
+            <div class="si-desc">Background jobs, queues, cron — 50k steps/mo</div>
+            <div class="si-free">FREE</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Upstash Redis</div>
+            <div class="si-desc">Rate limiting, sessions, queues</div>
+            <div class="si-free">FREE</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Umami + Doppler</div>
+            <div class="si-desc">Analytics + secrets management</div>
+            <div class="si-free">FREE</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pb-section">
+        <div class="sec-title">Real Limits</div>
+        <div class="limits-table">
+          <div class="lt-row"><span class="lt-key">Concurrent users</span><span class="lt-val good">~200–400</span></div>
+          <div class="lt-row"><span class="lt-key">Database size</span><span class="lt-val warn">500 MB + Redis cache</span></div>
+          <div class="lt-row"><span class="lt-key">RAM</span><span class="lt-val warn">512 MB split services</span></div>
+          <div class="lt-row"><span class="lt-key">Email sends</span><span class="lt-val good">400/day (dual)</span></div>
+          <div class="lt-row"><span class="lt-key">Background jobs</span><span class="lt-val good">50k steps/mo</span></div>
+          <div class="lt-row"><span class="lt-key">Automations</span><span class="lt-val good">Unlimited (n8n)</span></div>
+          <div class="lt-row"><span class="lt-key">Redis commands</span><span class="lt-val warn">10k/day</span></div>
+        </div>
+      </div>
+
+      <div class="pb-section">
+        <div class="sec-title">Scalability</div>
+        <div class="scale-list">
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-label">Traffic capacity</span><span class="sl-pct">50%</span></div>
+            <div class="sl-track"><div class="sl-fill" style="width:50%"></div></div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-label">Data headroom</span><span class="sl-pct">40%</span></div>
+            <div class="sl-track"><div class="sl-fill" style="width:40%"></div></div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-label">Compute power</span><span class="sl-pct">45%</span></div>
+            <div class="sl-track"><div class="sl-fill" style="width:45%"></div></div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-label">Configuration flex</span><span class="sl-pct">75%</span></div>
+            <div class="sl-track"><div class="sl-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pb-section">
+        <div class="sec-title">Operational Fit</div>
+        <div class="fit-pair">
+          <div class="fit-col yes">
+            <div class="fit-col-head"><div class="fch-icon">✓</div>Deploy For</div>
+            <div class="fit-items">
+              <div class="fit-item">10–30 client portals</div>
+              <div class="fit-item">Automated report pipelines</div>
+              <div class="fit-item">Multi-service agency ops</div>
+              <div class="fit-item">Internal CRM / dashboards</div>
+              <div class="fit-item">Webhook-driven workflows</div>
+            </div>
+          </div>
+          <div class="fit-col no">
+            <div class="fit-col-head"><div class="fch-icon">✕</div>Avoid For</div>
+            <div class="fit-items">
+              <div class="fit-item">Video / media processing</div>
+              <div class="fit-item">500+ daily active users</div>
+              <div class="fit-item">Compliance-heavy clients</div>
+              <div class="fit-item">On-server AI inference</div>
+              <div class="fit-item">Enterprise SLA requirements</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── PANEL T3 ── -->
+  <div class="tier-panel tp3" id="panel-t3">
+    <div class="panel-head">
+      <div class="ph-left">
+        <div class="ph-tag">Tier 03 // Pro Level</div>
+        <div class="ph-name">Pro Level</div>
+        <div class="ph-desc">Production-grade infrastructure. Paid only where it directly expands capability, everything else stays free.</div>
+      </div>
+      <div class="ph-right">
+        <div class="ph-price">$55<span style="font-size:16px;font-weight:500;color:var(--text-secondary)">/mo</span></div>
+        <div class="ph-price-note">~$670/yr full production</div>
+      </div>
+    </div>
+
+    <div class="panel-body">
+
+      <div class="pb-section">
+        <div class="sec-title">Stack</div>
+        <div class="stack-list">
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Porkbun</div>
+            <div class="si-desc">Domain registration</div>
+            <div class="si-free">$10/yr</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Cloudflare Pro</div>
+            <div class="si-desc">Advanced WAF, image optimization, analytics</div>
+            <div class="si-free">$20/mo</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Railway Pro</div>
+            <div class="si-desc">8GB RAM, more vCPU, no credit anxiety</div>
+            <div class="si-free">$20/mo</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Supabase Pro</div>
+            <div class="si-desc">8GB DB, 50GB bandwidth, no pause</div>
+            <div class="si-free">$25/mo</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Resend + Brevo</div>
+            <div class="si-desc">Dual email stack — stays free</div>
+            <div class="si-free">FREE</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">n8n + Metabase</div>
+            <div class="si-desc">Full automation + BI dashboards on Railway</div>
+            <div class="si-free">FREE</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Inngest + Upstash</div>
+            <div class="si-desc">Jobs + Redis — free tiers sufficient</div>
+            <div class="si-free">FREE</div>
+          </div>
+          <div class="stack-item">
+            <div class="si-dot"></div>
+            <div class="si-name">Doppler + R2</div>
+            <div class="si-desc">Secrets management + object storage</div>
+            <div class="si-free">FREE</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pb-section">
+        <div class="sec-title">Real Limits</div>
+        <div class="limits-table">
+          <div class="lt-row"><span class="lt-key">Concurrent users</span><span class="lt-val good">1,000–5,000+</span></div>
+          <div class="lt-row"><span class="lt-key">Database size</span><span class="lt-val good">8 GB + expandable</span></div>
+          <div class="lt-row"><span class="lt-key">RAM per service</span><span class="lt-val good">Up to 8 GB</span></div>
+          <div class="lt-row"><span class="lt-key">Bandwidth</span><span class="lt-val good">50 GB + ∞ CDN</span></div>
+          <div class="lt-row"><span class="lt-key">DB auto-pause</span><span class="lt-val good">None — always on</span></div>
+          <div class="lt-row"><span class="lt-key">WAF rules</span><span class="lt-val good">25 active (CF Pro)</span></div>
+          <div class="lt-row"><span class="lt-key">Zero-downtime deploy</span><span class="lt-val good">Achievable</span></div>
+        </div>
+      </div>
+
+      <div class="pb-section">
+        <div class="sec-title">Scalability</div>
+        <div class="scale-list">
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-label">Traffic capacity</span><span class="sl-pct">85%</span></div>
+            <div class="sl-track"><div class="sl-fill" style="width:85%"></div></div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-label">Data headroom</span><span class="sl-pct">80%</span></div>
+            <div class="sl-track"><div class="sl-fill" style="width:80%"></div></div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-label">Compute power</span><span class="sl-pct">80%</span></div>
+            <div class="sl-track"><div class="sl-fill" style="width:80%"></div></div>
+          </div>
+          <div class="sl-row">
+            <div class="sl-top"><span class="sl-label">Configuration flex</span><span class="sl-pct">95%</span></div>
+            <div class="sl-track"><div class="sl-fill" style="width:95%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pb-section">
+        <div class="sec-title">Operational Fit</div>
+        <div class="fit-pair">
+          <div class="fit-col yes">
+            <div class="fit-col-head"><div class="fch-icon">✓</div>Deploy For</div>
+            <div class="fit-items">
+              <div class="fit-item">50+ active client portals</div>
+              <div class="fit-item">SaaS product launches</div>
+              <div class="fit-item">Real-time data dashboards</div>
+              <div class="fit-item">Heavy automation pipelines</div>
+              <div class="fit-item">BI reporting + Metabase</div>
+            </div>
+          </div>
+          <div class="fit-col no">
+            <div class="fit-col-head"><div class="fch-icon">✕</div>Avoid For</div>
+            <div class="fit-items">
+              <div class="fit-item">HIPAA / SOC2 compliance</div>
+              <div class="fit-item">Dedicated IP requirements</div>
+              <div class="fit-item">Video encoding at scale</div>
+              <div class="fit-item">On-prem data residency</div>
+              <div class="fit-item">Enterprise 99.99% SLA</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<!-- COMPARE BANNER -->
+<div class="compare-bar">
+  <div class="compare-inner">
+    <div class="compare-left">
+      <div class="compare-label">Upgrade Path</div>
+      <div class="compare-text">
+        The only jump that costs money is <strong>Tier 2 → Tier 3</strong>. Start on Tier 1, migrate ops to Tier 2 at zero extra cost, then upgrade when revenue justifies it.
+      </div>
+    </div>
+    <button class="upgrade-btn" onclick="switchTier('t2', document.querySelector('.tab-btn.t2'))">
+      Start at Tier 2 →
+    </button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">SATCORP</div>
+  <div class="footer-meta">TACTICAL CONCIERGE SERVICES///INFRA BRIEF REF-0042///2026</div>
+  <div class="footer-tags">
+    <div class="footer-tag">Custom Code</div>
+    <div class="footer-tag">No Templates</div>
+    <div class="footer-tag">End-to-End Ops</div>
+  </div>
+</footer>
+
+<script>
+function switchTier(tier, clickedBtn) {
+  // Deactivate all tabs
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  // Deactivate all panels
+  document.querySelectorAll('.tier-panel').forEach(p => p.classList.remove('active'));
+  // Activate clicked tab
+  clickedBtn.classList.add('active');
+  // Activate panel
+  const panel = document.getElementById('panel-' + tier);
+  if (panel) panel.classList.add('active');
+}
+</script>
+
+</body>
+</html>
